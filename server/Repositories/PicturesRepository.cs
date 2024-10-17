@@ -1,5 +1,7 @@
 
 
+
+
 namespace postit_dotnet.Repositories;
 
 public class PicturesRepository
@@ -49,5 +51,29 @@ public class PicturesRepository
     }, new { albumId }).ToList();
 
     return pictures;
+  }
+
+  internal Picture GetPictureById(int pictureId)
+  {
+    string sql = "SELECT * FROM pictures WHERE id = @pictureId;";
+
+    Picture picture = _db.Query<Picture>(sql, new { pictureId }).FirstOrDefault();
+    return picture;
+  }
+
+  internal void DeletePicture(int pictureId)
+  {
+    string sql = "DELETE FROM pictures WHERE id = @pictureId LIMIT 1;";
+
+    int rowsAffected = _db.Execute(sql, new { pictureId });
+
+    if (rowsAffected == 0)
+    {
+      throw new Exception("No pictures deleted");
+    }
+    if (rowsAffected > 1)
+    {
+      throw new Exception($"{rowsAffected} pictures deleted and that ain't so good, partner");
+    }
   }
 }
