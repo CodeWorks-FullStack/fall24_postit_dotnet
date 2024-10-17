@@ -19,6 +19,12 @@ public class AlbumsService
     return album;
   }
 
+  internal Album GetAlbumById(int albumId)
+  {
+    Album album = _repository.GetAlbumById(albumId);
+    return album;
+  }
+
   internal List<Album> GetAllAlbums()
   {
     List<Album> albums = _repository.GetAllAlbums();

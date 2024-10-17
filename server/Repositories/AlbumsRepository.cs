@@ -47,10 +47,26 @@ public class AlbumsRepository
     return albums;
   }
 
+  internal Album GetAlbumById(int albumId)
+  {
+    string sql = @"
+    SELECT
+    albums.*,
+    accounts.*
+    FROM albums
+    JOIN accounts ON albums.creatorId = accounts.id
+    WHERE albums.id = @albumId;";
+
+    Album album = _db.Query<Album, Profile, Album>(sql, JoinCreatorToAlbum, new { albumId }).FirstOrDefault();
+    return album;
+  }
+
   private Album JoinCreatorToAlbum(Album album, Profile profile)
   {
     album.Creator = profile;
     return album;
   }
+
+
 }
 
