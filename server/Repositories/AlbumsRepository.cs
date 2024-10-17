@@ -23,7 +23,7 @@ public class AlbumsRepository
     JOIN accounts ON albums.creatorId = accounts.id
     WHERE albums.id = LAST_INSERT_ID();";
 
-    Album album = _db.Query<Album, Account, Album>(sql, (album, account) =>
+    Album album = _db.Query<Album, Profile, Album>(sql, (album, account) =>
     {
       album.Creator = account;
       return album;
