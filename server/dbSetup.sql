@@ -25,6 +25,16 @@ CREATE TABLE
       'vibes',
       'misc'
     ) NOT NULL,
-    creatorId VARCHAR(255),
+    creatorId VARCHAR(255) NOT NULL,
     FOREIGN KEY (creatorId) REFERENCES accounts (id) ON DELETE CASCADE
+  );
+
+CREATE TABLE
+  pictures (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    imgUrl TEXT NOT NULL,
+    albumId INT NOT NULL,
+    creatorId VARCHAR(255) NOT NULL,
+    FOREIGN KEY (creatorId) REFERENCES accounts (id) ON DELETE CASCADE,
+    FOREIGN KEY (albumId) REFERENCES albums (id) ON DELETE CASCADE
   );
