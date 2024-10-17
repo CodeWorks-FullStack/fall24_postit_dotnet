@@ -1,4 +1,5 @@
 
+
 namespace postit_dotnet.Repositories;
 
 public class PicturesRepository
@@ -29,5 +30,24 @@ public class PicturesRepository
       return picture;
     }, pictureData).FirstOrDefault();
     return picture;
+  }
+
+  internal List<Picture> GetPicturesByAlbumId(int albumId)
+  {
+    string sql = @"
+    SELECT
+    pictures.*,
+    accounts.*
+    FROM pictures
+    JOIN accounts ON pictures.creatorId = accounts.id
+    WHERE pictures.albumId = @albumId;";
+
+    List<Picture> pictures = _db.Query<Picture, Profile, Picture>(sql, (picture, profile) =>
+    {
+      picture.Creator = profile;
+      return picture;
+    }, new { albumId }).ToList();
+
+    return pictures;
   }
 }
