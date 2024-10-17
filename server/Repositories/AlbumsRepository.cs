@@ -67,6 +67,25 @@ public class AlbumsRepository
     return album;
   }
 
+  internal void ArchiveAlbum(Album albumToArchive)
+  {
+    string sql = @"
+    UPDATE
+    albums
+    SET archived = @Archived
+    WHERE id = @Id
+    LIMIT 1;";
 
+    int rowsAffected = _db.Execute(sql, albumToArchive);
+
+    if (rowsAffected == 0)
+    {
+      throw new Exception("No albums were updated");
+    }
+    if (rowsAffected > 1)
+    {
+      throw new Exception($"{rowsAffected} albums were updated, and that is bad! Only 1 album should have been updated! Check your sql syntax for errors, or ask Jake Overall for help!");
+    }
+  }
 }
 
