@@ -1,4 +1,5 @@
 
+
 namespace postit_dotnet.Repositories;
 
 public class AlbumsRepository
@@ -29,6 +30,14 @@ public class AlbumsRepository
       return album;
     }, albumData).FirstOrDefault();
     return album;
+  }
+
+  internal List<Album> GetAllAlbums()
+  {
+    string sql = "SELECT * FROM albums;";
+
+    List<Album> albums = _db.Query<Album>(sql).ToList();
+    return albums;
   }
 }
 

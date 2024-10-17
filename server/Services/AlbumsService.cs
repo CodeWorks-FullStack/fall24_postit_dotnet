@@ -1,4 +1,7 @@
 
+
+using Microsoft.AspNetCore.Http.HttpResults;
+
 namespace postit_dotnet.Services;
 
 public class AlbumsService
@@ -14,5 +17,12 @@ public class AlbumsService
   {
     Album album = _repository.CreateAlbum(albumData);
     return album;
+  }
+
+  internal List<Album> GetAllAlbums()
+
+  {
+    List<Album> albums = _repository.GetAllAlbums();
+    return albums;
   }
 }
