@@ -22,6 +22,10 @@ public class AlbumsService
   internal Album GetAlbumById(int albumId)
   {
     Album album = _repository.GetAlbumById(albumId);
+    if (album == null)
+    {
+      throw new Exception($"Invalid album id: {albumId}");
+    }
     return album;
   }
 
