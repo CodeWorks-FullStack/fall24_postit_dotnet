@@ -20,7 +20,6 @@ public class AlbumsService
   }
 
   internal List<Album> GetAllAlbums()
-
   {
     List<Album> albums = _repository.GetAllAlbums();
     return albums;
