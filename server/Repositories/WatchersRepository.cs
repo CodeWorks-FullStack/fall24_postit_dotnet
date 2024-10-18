@@ -3,6 +3,7 @@
 
 
 
+
 namespace postit_dotnet.Repositories;
 
 public class WatchersRepository
@@ -24,5 +25,17 @@ public class WatchersRepository
 
     Watcher watcher = _db.Query<Watcher>(sql, watcherData).FirstOrDefault();
     return watcher;
+  }
+
+  internal List<Watcher> GetWatcherProfilesByAlbumId(int albumId)
+  {
+    string sql = @"
+    SELECT
+    watchers.*
+    FROM watchers
+    WHERE watchers.albumId = @albumId;";
+
+    List<Watcher> watchers = _db.Query<Watcher>(sql, new { albumId }).ToList();
+    return watchers;
   }
 }

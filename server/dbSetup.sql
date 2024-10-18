@@ -49,3 +49,8 @@ CREATE TABLE
     -- I can only watch an album one time!
     UNIQUE (accountId, albumId)
   );
+
+SELECT
+  *
+FROM
+  watchers;
