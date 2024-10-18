@@ -55,15 +55,18 @@ public class WatchersRepository
     string sql = @"
     SELECT
     watchers.*,
-    albums.*
+    albums.*,
+    accounts.*
     FROM watchers
     JOIN albums ON albums.id = watchers.albumId
+    JOIN accounts ON accounts.id = albums.creatorId
     WHERE watchers.accountId = @userId;";
 
-    List<WatcherAlbum> watcherAlbums = _db.Query<Watcher, WatcherAlbum, WatcherAlbum>(sql, (watcher, album) =>
+    List<WatcherAlbum> watcherAlbums = _db.Query<Watcher, WatcherAlbum, Profile, WatcherAlbum>(sql, (watcher, album, profile) =>
     {
       album.AccountId = watcher.AccountId;
       album.WatcherId = watcher.Id;
+      album.Creator = profile;
       return album;
     }, new { userId }).ToList();
 
