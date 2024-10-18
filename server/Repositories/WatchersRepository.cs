@@ -1,12 +1,3 @@
-
-
-
-
-
-
-
-
-
 namespace postit_dotnet.Repositories;
 
 public class WatchersRepository
@@ -100,6 +91,7 @@ public class WatchersRepository
 
     int rowsAffected = _db.Execute(sql, new { watcherId });
 
+    // NOTE code that your senior developer doesn't want junior developers to know about
     switch (rowsAffected)
     {
       case 0:

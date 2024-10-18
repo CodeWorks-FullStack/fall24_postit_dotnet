@@ -14,6 +14,7 @@ public class WatchersController : ControllerBase
 
   [Authorize]
   [HttpPost]
+  // NOTE the data from the body will just be data for the many-to-many
   public async Task<ActionResult<WatcherProfile>> CreateWatcher([FromBody] Watcher watcherData)
   {
     try
@@ -37,7 +38,7 @@ public class WatchersController : ControllerBase
     {
       Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
       _watchersService.DeleteWatcher(watcherId, userInfo.Id);
-      return "Watcher relationship has been deleted!";
+      return Ok("Watcher relationship has been deleted!");
     }
     catch (Exception exception)
     {

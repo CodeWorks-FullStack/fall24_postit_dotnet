@@ -7,9 +7,9 @@ public class AlbumsController : ControllerBase
   public AlbumsController(AlbumsService albumsService, Auth0Provider auth0Provider, PicturesService picturesService, WatchersService watchersService)
   {
     _albumsService = albumsService;
-    _auth0Provider = auth0Provider;
     _picturesService = picturesService;
     _watchersService = watchersService;
+    _auth0Provider = auth0Provider;
   }
   private readonly AlbumsService _albumsService;
   private readonly PicturesService _picturesService;
