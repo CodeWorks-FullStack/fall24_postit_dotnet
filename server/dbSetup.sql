@@ -51,6 +51,8 @@ CREATE TABLE
   );
 
 SELECT
-  *
+  watchers.*,
+  accounts.*
 FROM
-  watchers;
+  watchers
+  JOIN accounts ON accounts.id = watchers.accountId;

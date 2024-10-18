@@ -19,9 +19,9 @@ public class WatchersService
     return watcher;
   }
 
-  internal List<Watcher> GetWatcherProfilesByAlbumId(int albumId)
+  internal List<Profile> GetWatcherProfilesByAlbumId(int albumId)
   {
-    List<Watcher> watchers = _repository.GetWatcherProfilesByAlbumId(albumId);
+    List<Profile> watchers = _repository.GetWatcherProfilesByAlbumId(albumId);
     return watchers;
   }
 }

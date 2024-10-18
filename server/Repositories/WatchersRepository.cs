@@ -27,15 +27,21 @@ public class WatchersRepository
     return watcher;
   }
 
-  internal List<Watcher> GetWatcherProfilesByAlbumId(int albumId)
+  internal List<Profile> GetWatcherProfilesByAlbumId(int albumId)
   {
     string sql = @"
     SELECT
-    watchers.*
+    watchers.*,
+    accounts.*
     FROM watchers
+    JOIN accounts ON accounts.id = watchers.accountId
     WHERE watchers.albumId = @albumId;";
 
-    List<Watcher> watchers = _db.Query<Watcher>(sql, new { albumId }).ToList();
+    List<Profile> watchers = _db.Query<Watcher, Profile, Profile>(sql, (watcher, profile) =>
+    {
+      return profile;
+    },
+     new { albumId }).ToList();
     return watchers;
   }
 }
