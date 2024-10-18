@@ -6,3 +6,10 @@ public class Watcher
   public string AccountId { get; set; }
   public int AlbumId { get; set; }
 }
+
+public class WatcherProfile : Profile
+{
+  // NOTE all members inherited from Profile class
+  public int WatcherId { get; set; }
+  public int AlbumId { get; set; }
+}
