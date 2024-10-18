@@ -76,7 +76,7 @@ public class AlbumsController : ControllerBase
     }
   }
 
-  [HttpGet("{albumId}/pictures")]
+  [HttpGet("{albumId}/pictures")] // api/albums/1/pictures
   public ActionResult<List<Picture>> GetPicturesByAlbumId(int albumId)
   {
     try
