@@ -13,4 +13,9 @@ public class WatcherProfile : Profile
   public int WatcherId { get; set; }
   public int AlbumId { get; set; }
 }
-
+public class WatcherAlbum : Album
+{
+  // NOTE all members inherited from Album class
+  public int WatcherId { get; set; }
+  public string AccountId { get; set; }
+}

@@ -3,6 +3,7 @@
 
 
 
+
 namespace postit_dotnet.Services;
 
 public class WatchersService
@@ -23,5 +24,11 @@ public class WatchersService
   {
     List<WatcherProfile> watcherProfiles = _repository.GetWatcherProfilesByAlbumId(albumId);
     return watcherProfiles;
+  }
+
+  internal List<WatcherAlbum> GetWatcherAlbumsByUserId(string userId)
+  {
+    List<WatcherAlbum> watcherAlbums = _repository.GetWatcherAlbumsByUserId(userId);
+    return watcherAlbums;
   }
 }

@@ -56,3 +56,24 @@ SELECT
 FROM
   watchers
   JOIN accounts ON accounts.id = watchers.accountId;
+
+SELECT
+  watchers.*,
+  albums.*
+FROM
+  watchers
+  JOIN albums ON albums.id = watchers.albumId
+WHERE
+  watchers.`accountId` = '65f87bc1e02f1ee243874743'
+ORDER BY
+  watchers.id;
+
+SELECT
+  *
+FROM
+  albums;
+
+INSERT INTO
+  watchers (albumId, accountId)
+VALUES
+  (10, '65f87bc1e02f1ee243874743');
