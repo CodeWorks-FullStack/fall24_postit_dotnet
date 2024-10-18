@@ -27,7 +27,7 @@ public class WatchersRepository
     return watcher;
   }
 
-  internal List<Profile> GetWatcherProfilesByAlbumId(int albumId)
+  internal List<WatcherProfile> GetWatcherProfilesByAlbumId(int albumId)
   {
     string sql = @"
     SELECT
@@ -37,8 +37,10 @@ public class WatchersRepository
     JOIN accounts ON accounts.id = watchers.accountId
     WHERE watchers.albumId = @albumId;";
 
-    List<Profile> watchers = _db.Query<Watcher, Profile, Profile>(sql, (watcher, profile) =>
+    List<WatcherProfile> watchers = _db.Query<Watcher, WatcherProfile, WatcherProfile>(sql, (watcher, profile) =>
     {
+      profile.AlbumId = watcher.AlbumId;
+      profile.WatcherId = watcher.Id;
       return profile;
     },
      new { albumId }).ToList();

@@ -13,3 +13,4 @@ public class WatcherProfile : Profile
   public int WatcherId { get; set; }
   public int AlbumId { get; set; }
 }
+

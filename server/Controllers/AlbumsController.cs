@@ -93,12 +93,12 @@ public class AlbumsController : ControllerBase
   }
 
   [HttpGet("{albumId}/watchers")]
-  public ActionResult<List<Profile>> GetWatcherProfilesByAlbumId(int albumId)
+  public ActionResult<List<WatcherProfile>> GetWatcherProfilesByAlbumId(int albumId)
   {
     try
     {
-      List<Profile> watchers = _watchersService.GetWatcherProfilesByAlbumId(albumId);
-      return Ok(watchers);
+      List<WatcherProfile> watcherProfiles = _watchersService.GetWatcherProfilesByAlbumId(albumId);
+      return Ok(watcherProfiles);
     }
     catch (Exception exception)
     {
