@@ -17,17 +17,28 @@ public class WatchersRepository
   }
   private readonly IDbConnection _db;
 
-  internal Watcher CreateWatcher(Watcher watcherData)
+  internal WatcherProfile CreateWatcher(Watcher watcherData)
   {
     string sql = @"
     INSERT INTO
     watchers(accountId, albumId)
     VALUES(@AccountId, @AlbumId);
 
-    SELECT * FROM watchers WHERE id = LAST_INSERT_ID();";
+    SELECT
+    watchers.*,
+    accounts.*
+    FROM watchers
+    JOIN accounts ON watchers.accountId = accounts.id
+    WHERE watchers.id = LAST_INSERT_ID();";
 
-    Watcher watcher = _db.Query<Watcher>(sql, watcherData).FirstOrDefault();
-    return watcher;
+    WatcherProfile watcherProfile = _db.Query<Watcher, WatcherProfile, WatcherProfile>(sql, (watcher, profile) =>
+    {
+      profile.WatcherId = watcher.Id;
+      profile.AlbumId = watcher.AlbumId;
+      return profile;
+    },
+    watcherData).FirstOrDefault();
+    return watcherProfile;
   }
 
   internal List<WatcherProfile> GetWatcherProfilesByAlbumId(int albumId)

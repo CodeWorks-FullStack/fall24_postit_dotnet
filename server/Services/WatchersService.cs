@@ -15,10 +15,10 @@ public class WatchersService
   }
   private readonly WatchersRepository _repository;
 
-  internal Watcher CreateWatcher(Watcher watcherData)
+  internal WatcherProfile CreateWatcher(Watcher watcherData)
   {
-    Watcher watcher = _repository.CreateWatcher(watcherData);
-    return watcher;
+    WatcherProfile watcherProfile = _repository.CreateWatcher(watcherData);
+    return watcherProfile;
   }
 
   internal List<WatcherProfile> GetWatcherProfilesByAlbumId(int albumId)
