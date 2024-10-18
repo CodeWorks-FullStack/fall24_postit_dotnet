@@ -5,6 +5,8 @@
 
 
 
+
+
 namespace postit_dotnet.Repositories;
 
 public class WatchersRepository
@@ -71,5 +73,30 @@ public class WatchersRepository
     }, new { userId }).ToList();
 
     return watcherAlbums;
+  }
+
+  internal Watcher GetWatcherById(int watcherId)
+  {
+    string sql = "SELECT * FROM watchers WHERE id = @watcherId;";
+
+    Watcher watcher = _db.Query<Watcher>(sql, new { watcherId }).FirstOrDefault();
+    return watcher;
+  }
+
+  internal void DeleteWatcher(int watcherId)
+  {
+    string sql = "DELETE FROM watchers WHERE id = @watcherId LIMIT 1;";
+
+    int rowsAffected = _db.Execute(sql, new { watcherId });
+
+    switch (rowsAffected)
+    {
+      case 0:
+        throw new Exception("Delete failed!");
+      case 1:
+        break;
+      default:
+        throw new Exception($"{rowsAffected} watchers were deleted and that ain't it big dawg");
+    }
   }
 }
